@@ -8,7 +8,6 @@ const token = 'test'; // type here your verification token
 
 app.listen(3000, () => console.log('[BotEngine] Webhook is listening'));
 
-
 app.get('/', (req, res) => {
     // check if verification token is correct
     if (req.query.token !== token) {
@@ -19,7 +18,6 @@ app.get('/', (req, res) => {
     // return challenge
     return res.end(req.query.challenge);
 });
-
 
 app.post('/', (req, res) => {
     // check if verification token is correct
