@@ -6,13 +6,10 @@ const bodyParser = require('body-parser');
 const app = express().use(bodyParser.json()); // creates http server
 const token = 'test'; // type here your verification token
 
-app.listen(3000, () => console.log('[BotEngine] Webhook is listening'));
-
 app.get('/', (req, res) => {
     // check if verification token is correct
     if (req.query.token !== token) {
-        res.writeHead(401);
-        return res.end();
+        return res.sendStatus(401);
     }
 
     // return challenge
@@ -22,8 +19,7 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
     // check if verification token is correct
     if (req.query.token !== token) {
-        res.writeHead(401);
-        return res.end();
+        return res.sendStatus(401);
     }
   
     // print request body
@@ -39,5 +35,7 @@ app.post('/', (req, res) => {
         ]
     };
 
-    res.end(JSON.stringify(data));
+    res.json(data);
 });
+
+app.listen(3000, () => console.log('[BotEngine] Webhook is listening'));
